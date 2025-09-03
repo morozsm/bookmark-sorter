@@ -1,0 +1,56 @@
+input:
+  bookmarks_path: "~/.config/google-chrome/Default/Bookmarks"
+  profile_glob: "~/.config/google-chrome/*/Bookmarks"
+  import_html: ""
+
+output:
+  export_dir: "./out"
+  plan_name: "plan-{timestamp}"
+  report_formats: ["html","md"]
+
+network:
+  enabled: false
+  timeout_sec: 8
+  retries: 2
+  concurrent: 16
+  user_agent: "cbclean/0.1"
+
+normalize:
+  strip_query_params: ["utm_*","gclid","yclid","fbclid","ref","ref_src"]
+  strip_fragments: true
+  strip_www: true
+
+dedup:
+  title_similarity_threshold: 0.90
+  content_similarity_threshold: 0.92
+  prefer_shorter_url: true
+
+liveness:
+  enabled: false
+  treat_401_403_as_alive: true
+  soft404_patterns: ["not found","страница не найдена","page removed","404"]
+
+dead_links:
+  on_gone: "move_to/_Trash"
+  wayback_lookup: false
+
+categorize:
+  mode: "rules"
+  rules_file: "./configs/rules.example.yaml"
+  embeddings:
+    model: "all-MiniLM-L6-v2"
+    cluster_algo: "hdbscan"
+    min_cluster_size: 4
+  llm:
+    provider: "openai"
+    model: "gpt-4o-mini"
+    batch_size: 30
+    only_uncertain: true
+
+thresholds:
+  tag_confidence_move: 0.75
+  tag_confidence_ask: 0.55
+
+apply:
+  mode: "export_html"
+

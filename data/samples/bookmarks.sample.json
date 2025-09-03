@@ -1,0 +1,19 @@
+{
+  "checksum": "",
+  "roots": {
+    "bookmark_bar": {
+      "children": [
+        {"type": "url", "id": "1", "name": "Python Docs", "url": "https://docs.python.org/3/?utm_source=test#intro"},
+        {"type": "url", "id": "2", "name": "GitHub", "url": "https://www.github.com/"},
+        {"type": "folder", "name": "Dev", "children": [
+          {"type": "url", "id": "3", "name": "Docker", "url": "https://docker.com/get-started?ref=abc"},
+          {"type": "url", "id": "4", "name": "Python Docs", "url": "https://docs.python.org/3/"}
+        ]}
+      ],
+      "name": "Bookmarks Bar",
+      "type": "folder"
+    }
+  },
+  "version": 1
+}
+

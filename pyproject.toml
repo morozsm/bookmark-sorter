@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cbclean"
+version = "0.1.0"
+description = "Chrome bookmarks cleaner and organizer CLI"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Contributors" }]
+dependencies = [
+  "typer>=0.12",
+  "rich>=13",
+  "pydantic>=2",
+  "pydantic-settings>=2",
+  "aiohttp>=3",
+  "beautifulsoup4>=4.12",
+  "jinja2>=3",
+  "rapidfuzz>=3",
+  "ruamel.yaml>=0.18",
+]
+
+[project.optional-dependencies]
+dev = [
+  "black>=24",
+  "ruff>=0.5",
+  "mypy>=1.10",
+  "pytest>=8",
+  "pytest-cov>=5",
+  "pre-commit>=3",
+]
+
+[project.scripts]
+cbclean = "cbclean.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+

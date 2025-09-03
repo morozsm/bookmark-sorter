@@ -1,0 +1,17 @@
+# cbclean report
+
+- Total bookmarks: {{ total }}
+- Duplicates: {{ duplicates }}
+
+## By Folder
+{% for folder, count in by_folder.items() -%}
+- {{ folder }}: {{ count }}
+{% endfor %}
+
+## Planned Changes
+| Bookmark ID | Action | Reason |
+| --- | --- | --- |
+{% for p in plan -%}
+| {{ p.bookmark_id }} | {{ p.action }} | {{ p.reason }} |
+{% endfor %}
+

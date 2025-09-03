@@ -1,0 +1,13 @@
+domains:
+  "github.com":      ["Dev","Code"]
+  "docs.python.org": ["Dev","Python","Docs"]
+  "habr.com":        ["Dev","RU"]
+  "raindrop.io":     ["Tools","Bookmarks"]
+keywords:
+  "docker":          ["Dev","Containers"]
+  "haproxy":         ["Dev","Networking"]
+  "recipe|рецепт":   ["Cooking"]
+  "ft8|wsjt":        ["Ham Radio","Digital"]
+lang:
+  "ru": ["RU"]
+

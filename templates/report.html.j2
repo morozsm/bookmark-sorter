@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>cbclean report</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 2rem; }
+      table { border-collapse: collapse; }
+      td, th { border: 1px solid #ddd; padding: 4px 8px; }
+    </style>
+  </head>
+  <body>
+    <h1>cbclean report</h1>
+    <p>Total bookmarks: <b>{{ total }}</b>, duplicates: <b>{{ duplicates }}</b></p>
+
+    <h2>By Folder</h2>
+    <table>
+      <tr><th>Folder</th><th>Count</th></tr>
+      {% for folder, count in by_folder.items() %}
+      <tr><td>{{ folder }}</td><td>{{ count }}</td></tr>
+      {% endfor %}
+    </table>
+
+    <h2>Planned Changes</h2>
+    <table>
+      <tr><th>Bookmark ID</th><th>Action</th><th>Reason</th></tr>
+      {% for p in plan %}
+      <tr><td>{{ p.bookmark_id }}</td><td>{{ p.action }}</td><td>{{ p.reason }}</td></tr>
+      {% endfor %}
+    </table>
+  </body>
+  </html>
+
