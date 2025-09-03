@@ -13,7 +13,6 @@ def classify_by_embeddings(bookmarks: List[Bookmark], *, model_name: str = "all-
     """
     try:
         from sentence_transformers import SentenceTransformer, util  # type: ignore
-        import numpy as np  # type: ignore
     except Exception:
         return None
 
