@@ -26,7 +26,7 @@ app = typer.Typer(add_completion=False, help="Chrome bookmarks cleaner and organ
 def process(
     config: str = typer.Option(
         "configs/config.example.yaml", "--config", "-c", help="Path to YAML config"
-    )
+    ),
 ) -> None:
     """Run full pipeline: read -> normalize -> dedup -> classify -> plan -> apply -> report"""
     cfg = _load_config(Path(config))
@@ -79,7 +79,9 @@ def process(
     out_dir = Path(cfg.output.export_dir)
     ensure_dir(out_dir)
     if cfg.apply.mode == "export_html":
-        export_bookmarks_html(deduped, out_dir / "bookmarks.cleaned.html", group_by=cfg.apply.group_by)
+        export_bookmarks_html(
+            deduped, out_dir / "bookmarks.cleaned.html", group_by=cfg.apply.group_by
+        )
         print(f"Exported HTML to {out_dir / 'bookmarks.cleaned.html'}")
     else:
         print("Dry-run: no export performed")

@@ -6,7 +6,14 @@ from .utils import Bookmark
 from .classify_rules import load_rules
 
 
-def classify_by_embeddings(bookmarks: List[Bookmark], *, model_name: str = "all-MiniLM-L6-v2", labels: Iterable[str] | None = None, top_k: int = 2, score_threshold: float = 0.35) -> None:  # pragma: no cover
+def classify_by_embeddings(
+    bookmarks: List[Bookmark],
+    *,
+    model_name: str = "all-MiniLM-L6-v2",
+    labels: Iterable[str] | None = None,
+    top_k: int = 2,
+    score_threshold: float = 0.35,
+) -> None:  # pragma: no cover
     """Assign tags via semantic similarity to label candidates using sentence-transformers.
 
     If sentence-transformers isn't available, this function leaves tags unchanged.

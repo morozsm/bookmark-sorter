@@ -5,7 +5,9 @@ from typing import Dict, Iterable, List
 from .utils import Bookmark, ensure_dir
 
 
-def export_bookmarks_html(bookmarks: List[Bookmark], export_path: Path, *, group_by: str = "folder") -> None:
+def export_bookmarks_html(
+    bookmarks: List[Bookmark], export_path: Path, *, group_by: str = "folder"
+) -> None:
     ensure_dir(export_path.parent)
     with export_path.open("w", encoding="utf-8") as f:
         f.write("<!DOCTYPE NETSCAPE-Bookmark-file-1>\n")
