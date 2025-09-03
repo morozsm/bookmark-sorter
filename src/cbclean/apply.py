@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Iterable, List
+from typing import List
 from .utils import Bookmark, ensure_dir
 
 
@@ -32,4 +32,3 @@ def html_escape(s: str) -> str:
         .replace(">", "&gt;")
         .replace('"', "&quot;")
     )
-

@@ -10,8 +10,8 @@
 
 ## Build, Test, and Dev Commands
 - Create venv: `python -m venv .venv && source .venv/bin/activate` (Windows: `Scripts\activate`).
-- Install (dev): `python -m pip install -U pip && pip install -e .[dev]`.
-- Run CLI (dry‑run): `python -m cbclean --help` then `cbclean --config configs/config.example.yaml`.
+- Install (dev): `python -m pip install -U pip && pip install -e '.[dev]'`.
+- Run CLI: `cbclean --config configs/config.example.yaml` (single-root command; no subcommands). For a demo, use `configs/config.local.yaml`.
 - Lint: `ruff check .`  • Format: `black .`  • Types: `mypy src/cbclean`.
 - Tests: `pytest -q`  • With coverage: `pytest --cov=cbclean --cov-report=term-missing`.
 - Pre-commit: `pre-commit install` then `pre-commit run -a` before commits.
@@ -39,4 +39,3 @@
 - Do not write to Chrome profile files; export only to `out/`.
 - Keep API keys and private data out of the repo; use local env/config overrides.
 - Defaults live in code; validate configs with pydantic and document any breaking changes.
-

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterable, List
+from typing import List
 from .utils import Bookmark, normalize_url
 
 
@@ -9,4 +9,3 @@ def normalize_bookmarks(bookmarks: List[Bookmark], *, strip_params: List[str], s
         if not b.url:
             continue
         b.normalized_url = normalize_url(b.url, strip_params=strip_params, strip_fragments=strip_fragments, strip_www_flag=strip_www)
-

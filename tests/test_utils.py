@@ -1,4 +1,3 @@
-from pathlib import Path
 from cbclean.utils import strip_www, filter_query, fnmatch_like, normalize_url, domain_of
 
 
@@ -27,4 +26,3 @@ def test_normalize_url_collapse_and_fragment():
 
 def test_domain_of_invalid():
     assert domain_of("not a url") is None
-

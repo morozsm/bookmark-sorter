@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from pathlib import Path
-from typing import List, Optional
-from pydantic import BaseModel, Field
+from typing import List
+from pydantic import BaseModel
 
 
 class InputCfg(BaseModel):
@@ -88,4 +87,3 @@ class AppConfig(BaseModel):
     categorize: CategorizeCfg = CategorizeCfg()
     thresholds: ThresholdsCfg = ThresholdsCfg()
     apply: ApplyCfg = ApplyCfg()
-

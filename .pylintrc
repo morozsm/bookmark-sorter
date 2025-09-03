@@ -1,0 +1,6 @@
+[MASTER]
+init-hook = "import sys, pathlib; sys.path.insert(0, str(pathlib.Path().resolve() / 'src'))"
+
+[MESSAGES CONTROL]
+disable = C0114, C0115, C0116
+

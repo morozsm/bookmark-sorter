@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from dataclasses import asdict
 from pathlib import Path
 from typing import Dict, List
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -43,4 +42,3 @@ def _by_folder(bookmarks: List[Bookmark]) -> Dict[str, int]:
         key = b.folder_path or "Bookmarks"
         m[key] = m.get(key, 0) + 1
     return dict(sorted(m.items(), key=lambda kv: kv[0]))
-

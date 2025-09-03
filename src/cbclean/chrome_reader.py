@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, List, Optional
+from typing import List, Optional
 import json
 from bs4 import BeautifulSoup
 

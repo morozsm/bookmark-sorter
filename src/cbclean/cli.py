@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from pathlib import Path
-import json
 import typer
 from rich import print
 
@@ -115,4 +114,3 @@ def _load_input(cfg: AppConfig):
 
 if __name__ == "__main__":
     app()
-
