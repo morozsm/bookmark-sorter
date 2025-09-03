@@ -5,8 +5,8 @@ Command-line tool to clean and organize Chrome bookmarks. It normalizes URLs, re
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)
 ![Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)
 ![Lint: Ruff](https://img.shields.io/badge/lint-ruff-46aef7.svg)
-[![CI](https://github.com/USER_OR_ORG/bookmark-sorter/actions/workflows/ci.yml/badge.svg)](https://github.com/USER_OR_ORG/bookmark-sorter/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/USER_OR_ORG/bookmark-sorter/branch/main/graph/badge.svg)](https://codecov.io/gh/USER_OR_ORG/bookmark-sorter)
+[![CI](https://github.com/morozsm/bookmark-sorter/actions/workflows/ci.yml/badge.svg)](https://github.com/morozsm/bookmark-sorter/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/morozsm/bookmark-sorter/branch/main/graph/badge.svg)](https://codecov.io/gh/morozsm/bookmark-sorter)
 
 ## Features
 - Import from Chrome profile JSON or exported HTML (Netscape format).
