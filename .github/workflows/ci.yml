@@ -21,21 +21,24 @@ jobs:
       - name: Set up uv (fast installer)
         uses: astral-sh/setup-uv@v4
 
+      - name: Create virtual environment (uv)
+        run: uv venv .venv
+
       - name: Install dependencies (uv)
         run: |
-          uv pip install -e '.[dev]'
+          uv pip install -p .venv/bin/python -e '.[dev]'
 
       - name: Lint (ruff)
-        run: uv run ruff check .
+        run: uv run -p .venv/bin/python ruff check .
 
       - name: Format check (black)
-        run: uv run black --check .
+        run: uv run -p .venv/bin/python black --check .
 
       - name: Type check (mypy)
-        run: uv run mypy src/cbclean
+        run: uv run -p .venv/bin/python mypy src/cbclean
 
       - name: Tests with coverage
-        run: uv run pytest --cov=cbclean --cov-report=xml --cov-report=term-missing
+        run: uv run -p .venv/bin/python pytest --cov=cbclean --cov-report=xml --cov-report=term-missing
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4

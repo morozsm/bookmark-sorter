@@ -33,7 +33,8 @@ Using zsh? Quote extras: `pip install -e '.[dev]'`.
 Fast alternative with uv
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
-uv pip install -e '.[dev]'
+uv venv .venv
+uv pip install -p .venv/bin/python -e '.[dev]'
 ```
 
 3) Run (demo config)
