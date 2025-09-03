@@ -22,6 +22,8 @@ class NetworkCfg(BaseModel):
     retries: int = 2
     concurrent: int = 16
     user_agent: str = "cbclean/0.1"
+    fetch_content: bool = False
+    max_content_chars: int = 2000
 
 
 class NormalizeCfg(BaseModel):
@@ -61,6 +63,12 @@ class LlmCfg(BaseModel):
     model: str = "gpt-4o-mini"
     batch_size: int = 30
     only_uncertain: bool = True
+    api_key_env: str = "OPENAI_API_KEY"
+    api_base: str | None = None
+    temperature: float = 0.0
+    labels: List[str] | None = None
+    allow_new_labels: bool = True
+    max_new_labels_per_batch: int = 10
 
 
 class CategorizeCfg(BaseModel):

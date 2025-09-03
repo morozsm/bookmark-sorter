@@ -97,3 +97,30 @@ def test_export_tag_all_uncategorized(tmp_path):
     export_bookmarks_html(bookmarks, out, group_by="tag-all")
     text = out.read_text(encoding="utf-8")
     assert "<H3>Uncategorized</H3>" in text
+
+
+def test_export_group_by_tag_hier(tmp_path):
+    out = tmp_path / "bookmarks.cleaned.html"
+    bookmarks = [
+        Bookmark(
+            id="1",
+            title="Linux Doc",
+            url="https://linux.example",
+            normalized_url="https://linux.example",
+            tags=["Docs/Reference", "Dev/Linux"],
+        ),
+        Bookmark(
+            id="2",
+            title="K8s",
+            url="https://k8s.io",
+            normalized_url="https://k8s.io",
+            tags=["Dev/Kubernetes"],
+        ),
+    ]
+    export_bookmarks_html(bookmarks, out, group_by="tag-hier")
+    text = out.read_text(encoding="utf-8")
+    # Nested headings should appear
+    assert text.count("<H3>Dev</H3>") == 1
+    assert "<H3>Linux</H3>" in text
+    assert "<H3>Kubernetes</H3>" in text
+    assert "<H3>Docs</H3>" in text and "<H3>Reference</H3>" in text

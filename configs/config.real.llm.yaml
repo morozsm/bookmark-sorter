@@ -1,0 +1,26 @@
+input:
+  import_html: "/Users/moroz/Projects/bookmark-sorter/data/samples/bookmarks_9_3_25.html"
+output:
+  export_dir: "./out_real_llm"
+  report_formats: ["html","md"]
+network:
+  enabled: false
+categorize:
+  mode: "llm"
+  llm:
+    provider: "openai"
+    model: "gpt-4o-mini"
+    batch_size: 30
+    only_uncertain: true
+    api_key_env: OPENAI_API_KEY
+    api_base: null
+    temperature: 0.0
+    labels: [
+      "Dev/Linux", "Dev/Networking", "Dev/Security", "Dev/CI-CD", "Dev/Containers", "Dev/Kubernetes",
+      "Docs/Reference", "Docs/Guides",
+      "Media/Video", "Media/News", "Social", "Productivity",
+      "Cloud/General", "Databases/General", "Programming/Python", "Programming/Go"
+    ]
+apply:
+  mode: "export_html"
+  group_by: "tag-hier"

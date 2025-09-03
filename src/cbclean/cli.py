@@ -12,7 +12,7 @@ from .dedup import deduplicate
 from .classify_rules import load_rules, classify_by_rules
 from .classify_embed import classify_by_embeddings
 from .classify_llm import classify_by_llm
-from .fetch import check_liveness
+from .fetch import check_liveness, enrich_with_content
 from .propose import propose_changes
 from .apply import export_bookmarks_html
 from .report import render_reports
@@ -64,7 +64,28 @@ def process(
             score_threshold=cfg.categorize.embeddings.score_threshold,
         )
     elif cfg.categorize.mode == "llm":
-        classify_by_llm(deduped)
+        if cfg.network.fetch_content:
+            enrich_with_content(
+                deduped,
+                enabled=cfg.network.enabled,
+                timeout_sec=cfg.network.timeout_sec,
+                concurrent=cfg.network.concurrent,
+                user_agent=cfg.network.user_agent,
+                max_chars=cfg.network.max_content_chars,
+            )
+        classify_by_llm(
+            deduped,
+            provider=cfg.categorize.llm.provider,
+            model=cfg.categorize.llm.model,
+            api_key_env=cfg.categorize.llm.api_key_env,
+            api_base=cfg.categorize.llm.api_base,
+            temperature=cfg.categorize.llm.temperature,
+            labels=cfg.categorize.llm.labels,
+            batch_size=cfg.categorize.llm.batch_size,
+            only_uncertain=cfg.categorize.llm.only_uncertain,
+            allow_new_labels=cfg.categorize.llm.allow_new_labels,
+            max_new_labels_per_batch=cfg.categorize.llm.max_new_labels_per_batch,
+        )
 
     # Liveness (stubbed for MVP)
     check_liveness(deduped, enabled=cfg.network.enabled)

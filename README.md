@@ -14,7 +14,9 @@ Command-line tool to clean and organize Chrome bookmarks. It normalizes URLs, re
 - Deduplication: hard duplicates by normalized URL and soft duplicates by title similarity.
 - Categorization:
   - Rule-based: domains and keywords map to tag lists.
-  - AI (optional): embeddings with `sentence-transformers` to assign tags by semantic similarity.
+  - AI (optional):
+    - Embeddings with `sentence-transformers` to assign tags by semantic similarity.
+    - External LLM (OpenAI-compatible) to label bookmarks using a prompt-guided schema.
 - Export: generate `bookmarks.cleaned.html` suitable for Chrome import (never writes back to profile files).
 - Reports: `report.html` and `report.md` with summary and planned changes.
 
@@ -79,6 +81,11 @@ Rules example: `configs/rules.example.yaml` (domains/keywords → tags).
 - Import from HTML: set `input.import_html` and `apply.mode: export_html`.
 - Quick demo: use `configs/config.local.yaml` (points to `data/samples/bookmarks.sample.json`).
 - AI categorization: install extras `pip install -e '.[embed]'` (or `uv pip install -p .venv/bin/python -e '.[embed]'`), set `categorize.mode: embeddings`, and `apply.group_by: tag`. The first run will download the model (e.g., `all-MiniLM-L6-v2`).
+ - LLM categorization (OpenAI-compatible):
+   - Install extras: `pip install -e '.[llm]'` (or with uv).
+   - Set API key: `export OPENAI_API_KEY=sk-...` (or configure `categorize.llm.api_key_env`).
+   - In config: `categorize.mode: llm`, optionally provide `categorize.llm.labels` to guide categories, and set `apply.group_by: tag-all`.
+   - Controls: `categorize.llm.batch_size` (default 30), `temperature` (default 0.0), `only_uncertain` (classify only items without tags).
 
 ## Architecture & Modules
 Pipeline: import → normalize → dedup → classify → plan → apply → report.
@@ -111,6 +118,7 @@ Contributor guidelines: see `AGENTS.md`.
 - The tool never modifies Chrome profile files; changes are exported to `out/`.
 - Current version does not perform network liveness checks.
 - Fully offline operation is supported (rules, normalization, deduplication, reporting).
+- LLM mode sends bookmark titles/URLs to the configured provider; review provider policies and redact sensitive data as needed.
 
 ## Troubleshooting & FAQ
 - zsh “no matches found: .[dev]”: quote it — `pip install -e '.[dev]'`.

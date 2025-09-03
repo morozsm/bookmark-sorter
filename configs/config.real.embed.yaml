@@ -14,4 +14,4 @@ categorize:
     score_threshold: 0.35
 apply:
   mode: "export_html"
-  group_by: "tag"
+  group_by: "tag-all"

@@ -52,6 +52,7 @@ class Bookmark:
     normalized_url: Optional[str] = None
     tags: List[str] = field(default_factory=list)
     liveness: Optional[str] = None
+    content_snippet: Optional[str] = None
 
 
 def normalize_url(
