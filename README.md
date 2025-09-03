@@ -30,6 +30,12 @@ pip install -e '.[dev]'
 ```
 Using zsh? Quote extras: `pip install -e '.[dev]'`.
 
+Fast alternative with uv
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+uv pip install -e '.[dev]'
+```
+
 3) Run (demo config)
 ```bash
 cbclean --config configs/config.local.yaml
@@ -90,9 +96,9 @@ Repository Layout
 - `tests/` — pytest suite.
 
 ## Development & Quality
-- Tests: `pytest -q`; coverage: `pytest --cov=cbclean --cov-report=term-missing`.
-- Lint/format: `ruff check .`, `black .`.
-- Types: `mypy src/cbclean`.
+- Tests: `pytest -q` (or `uv run pytest -q`); coverage: `pytest --cov=cbclean --cov-report=term-missing`.
+- Lint/format: `ruff check .`, `black .` (or `uv run ...`).
+- Types: `mypy src/cbclean` (or `uv run mypy src/cbclean`).
 - Dev install: `pip install -e '.[dev]'`.
 Contributor guidelines: see `AGENTS.md`.
 
