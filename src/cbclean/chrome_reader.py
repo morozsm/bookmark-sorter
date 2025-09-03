@@ -31,7 +31,8 @@ def read_chrome_json(path: Path, profile: Optional[str] = None) -> List[Bookmark
                 walk(child, new_path)
 
     for root in roots.values():
-        walk(root, folder_path=root.get("name", ""))
+        folder_name = root.get("name", "") if isinstance(root, dict) else "Bookmarks"
+        walk(root, folder_path=folder_name)
     return results
 
 

@@ -12,7 +12,9 @@ Command-line tool to clean and organize Chrome bookmarks. It normalizes URLs, re
 - Import from Chrome profile JSON or exported HTML (Netscape format).
 - URL normalization: drop tracking params, strip “www”, remove fragments, collapse double slashes.
 - Deduplication: hard duplicates by normalized URL and soft duplicates by title similarity.
-- Rule-based categorization: domains and keywords map to tag lists.
+- Categorization:
+  - Rule-based: domains and keywords map to tag lists.
+  - AI (optional): embeddings with `sentence-transformers` to assign tags by semantic similarity.
 - Export: generate `bookmarks.cleaned.html` suitable for Chrome import (never writes back to profile files).
 - Reports: `report.html` and `report.md` with summary and planned changes.
 
@@ -76,6 +78,7 @@ Rules example: `configs/rules.example.yaml` (domains/keywords → tags).
 - Import from JSON: set `input.bookmarks_path` to your Chrome profile `Bookmarks` file. The app only exports; it never edits profile files.
 - Import from HTML: set `input.import_html` and `apply.mode: export_html`.
 - Quick demo: use `configs/config.local.yaml` (points to `data/samples/bookmarks.sample.json`).
+- AI categorization: install extras `pip install -e '.[embed]'` (or `uv pip install -p .venv/bin/python -e '.[embed]'`), set `categorize.mode: embeddings`, and `apply.group_by: tag`. The first run will download the model (e.g., `all-MiniLM-L6-v2`).
 
 ## Architecture & Modules
 Pipeline: import → normalize → dedup → classify → plan → apply → report.
@@ -83,6 +86,7 @@ Pipeline: import → normalize → dedup → classify → plan → apply → rep
 - `normalize.py` — URL normalization.
 - `dedup.py` — hard and soft duplicates.
 - `classify_rules.py` — tag assignment via YAML rules.
+- `classify_embed.py` — AI tagging via sentence-transformers (optional dependency). Falls back to no-op if not installed.
 - `fetch.py` — liveness stub for MVP.
 - `propose.py` — change plan generation.
 - `apply.py` — HTML export (no writes to Chrome profile).

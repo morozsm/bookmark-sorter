@@ -1,0 +1,17 @@
+input:
+  import_html: "/Users/moroz/Projects/bookmark-sorter/data/samples/bookmarks_9_3_25.html"
+output:
+  export_dir: "./out_real_embed"
+  report_formats: ["html","md"]
+network:
+  enabled: false
+categorize:
+  mode: "embeddings"
+  rules_file: "./configs/rules.example.yaml"
+  embeddings:
+    model: "all-MiniLM-L6-v2"
+    top_k: 2
+    score_threshold: 0.35
+apply:
+  mode: "export_html"
+  group_by: "tag"

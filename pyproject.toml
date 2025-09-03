@@ -30,6 +30,10 @@ dev = [
   "pytest-cov>=5",
   "pre-commit>=3",
 ]
+embed = [
+  "sentence-transformers>=2.7",
+  "numpy>=1.26",
+]
 
 [project.scripts]
 cbclean = "cbclean.cli:app"
@@ -48,4 +52,3 @@ target-version = ["py311"]
 [tool.pytest.ini_options]
 addopts = "-ra"
 testpaths = ["tests"]
-

@@ -56,7 +56,13 @@ def process(
         rules = load_rules(Path(cfg.categorize.rules_file))
         classify_by_rules(deduped, rules)
     elif cfg.categorize.mode == "embeddings":
-        classify_by_embeddings(deduped)
+        classify_by_embeddings(
+            deduped,
+            model_name=cfg.categorize.embeddings.model,
+            labels=cfg.categorize.embeddings.labels,
+            top_k=cfg.categorize.embeddings.top_k,
+            score_threshold=cfg.categorize.embeddings.score_threshold,
+        )
     elif cfg.categorize.mode == "llm":
         classify_by_llm(deduped)
 
@@ -73,7 +79,7 @@ def process(
     out_dir = Path(cfg.output.export_dir)
     ensure_dir(out_dir)
     if cfg.apply.mode == "export_html":
-        export_bookmarks_html(deduped, out_dir / "bookmarks.cleaned.html")
+        export_bookmarks_html(deduped, out_dir / "bookmarks.cleaned.html", group_by=cfg.apply.group_by)
         print(f"Exported HTML to {out_dir / 'bookmarks.cleaned.html'}")
     else:
         print("Dry-run: no export performed")

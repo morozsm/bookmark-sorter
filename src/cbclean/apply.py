@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, Iterable, List
 from .utils import Bookmark, ensure_dir
 
 
-def export_bookmarks_html(bookmarks: List[Bookmark], export_path: Path) -> None:
+def export_bookmarks_html(bookmarks: List[Bookmark], export_path: Path, *, group_by: str = "folder") -> None:
     ensure_dir(export_path.parent)
     with export_path.open("w", encoding="utf-8") as f:
         f.write("<!DOCTYPE NETSCAPE-Bookmark-file-1>\n")
@@ -14,7 +14,9 @@ def export_bookmarks_html(bookmarks: List[Bookmark], export_path: Path) -> None:
         # Flat export grouped by folder_path
         by_folder: Dict[str, List[Bookmark]] = {}
         for b in bookmarks:
-            by_folder.setdefault(b.folder_path or "Bookmarks", []).append(b)
+            keys = list(_group_keys(b, group_by))
+            for key in keys:
+                by_folder.setdefault(key, []).append(b)
         for folder, items in sorted(by_folder.items()):
             f.write(f"<DT><H3>{html_escape(folder)}</H3>\n<DL><p>\n")
             for b in items:
@@ -29,3 +31,19 @@ def export_bookmarks_html(bookmarks: List[Bookmark], export_path: Path) -> None:
 
 def html_escape(s: str) -> str:
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+
+
+def _group_keys(b: Bookmark, group_by: str) -> Iterable[str]:
+    if group_by == "tag":
+        yield (b.tags[0] if b.tags else "Uncategorized")
+        return
+    if group_by == "tag-all":
+        tags = b.tags or []
+        if tags:
+            for t in tags:
+                yield t
+            return
+        yield "Uncategorized"
+        return
+    # default: folder
+    yield (b.folder_path or "Bookmarks")

@@ -1,0 +1,13 @@
+input:
+  import_html: "/Users/moroz/Projects/bookmark-sorter/data/samples/bookmarks_9_3_25.html"
+output:
+  export_dir: "./out_real"
+  report_formats: ["html","md"]
+network:
+  enabled: false
+categorize:
+  mode: "rules"
+  rules_file: "./configs/rules.example.yaml"
+apply:
+  mode: "export_html"
+  group_by: "tag"

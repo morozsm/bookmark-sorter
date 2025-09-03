@@ -35,12 +35,16 @@ dead_links:
   wayback_lookup: false
 
 categorize:
-  mode: "rules"
+  mode: "rules"  # rules | embeddings | llm
   rules_file: "./configs/rules.example.yaml"
   embeddings:
     model: "all-MiniLM-L6-v2"
     cluster_algo: "hdbscan"
     min_cluster_size: 4
+    top_k: 2
+    score_threshold: 0.35
+    # Optional: custom labels to guide embeddings (strings)
+    # labels: ["Dev", "Code", "Python", "Docs", "AI", "Cloud", "Databases", "News", "Video", "Social", "Shopping", "Reference"]
   llm:
     provider: "openai"
     model: "gpt-4o-mini"
@@ -53,4 +57,4 @@ thresholds:
 
 apply:
   mode: "export_html"
-
+  group_by: "folder"  # folder | tag

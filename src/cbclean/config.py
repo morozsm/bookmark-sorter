@@ -51,6 +51,9 @@ class EmbeddingsCfg(BaseModel):
     model: str = "all-MiniLM-L6-v2"
     cluster_algo: str = "hdbscan"  # hdbscan | kmeans
     min_cluster_size: int = 4
+    top_k: int = 2
+    score_threshold: float = 0.35
+    labels: List[str] | None = None
 
 
 class LlmCfg(BaseModel):
@@ -74,6 +77,7 @@ class ThresholdsCfg(BaseModel):
 
 class ApplyCfg(BaseModel):
     mode: str = "export_html"  # export_html | dry_run
+    group_by: str = "folder"  # folder | tag
 
 
 class AppConfig(BaseModel):

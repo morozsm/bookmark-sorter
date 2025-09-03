@@ -1,0 +1,13 @@
+input:
+  bookmarks_path: "data/samples/bookmarks.sample.json"
+output:
+  export_dir: "./out"
+  report_formats: ["html","md"]
+network:
+  enabled: false
+categorize:
+  mode: "rules"
+  rules_file: "./configs/rules.example.yaml"
+apply:
+  mode: "export_html"
+  group_by: "folder"
