@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import List
+from typing import Dict, List
 from .utils import Bookmark, ensure_dir
 
 
@@ -12,7 +12,7 @@ def export_bookmarks_html(bookmarks: List[Bookmark], export_path: Path) -> None:
         f.write('<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">\n')
         f.write("<TITLE>Bookmarks</TITLE>\n<H1>Bookmarks</H1>\n<DL><p>\n")
         # Flat export grouped by folder_path
-        by_folder = {}
+        by_folder: Dict[str, List[Bookmark]] = {}
         for b in bookmarks:
             by_folder.setdefault(b.folder_path or "Bookmarks", []).append(b)
         for folder, items in sorted(by_folder.items()):
