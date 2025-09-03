@@ -77,7 +77,7 @@ def normalize_url(
 
 def domain_of(url: str) -> Optional[str]:
     try:
-        return urlsplit(url).netloc.lower()
+        netloc = urlsplit(url).netloc.lower()
+        return netloc or None
     except Exception:
         return None
-

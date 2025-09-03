@@ -37,29 +37,41 @@ def read_chrome_json(path: Path, profile: Optional[str] = None) -> List[Bookmark
 def read_bookmarks_html(path: Path) -> List[Bookmark]:
     soup = BeautifulSoup(path.read_text(encoding="utf-8", errors="ignore"), "html.parser")
     results: List[Bookmark] = []
-    # Netscape format stores links in <A> tags often inside <DT> tags; use folder stacks via <H3>
     folder_stack: List[str] = ["Bookmarks"]
 
-    def walk_ul(ul) -> None:
-        for el in ul.children:
-            if getattr(el, "name", None) == "dt":
-                h3 = el.find("h3")
-                if h3:
+    def walk_dl(dl) -> None:
+        # Traverse children in order to respect folder nesting (H3 followed by DL)
+        for el in dl.children:
+            name = getattr(el, "name", None)
+            if name == "dt":
+                h3 = el.find("h3", recursive=False)
+                if h3 is not None:
                     folder_stack.append(h3.get_text(strip=True))
-                    next_dl = el.find_next_sibling("dl")
-                    if next_dl:
-                        inner_ul = next_dl
-                        walk_ul(inner_ul)
+                    # Find the next sibling DL which contains this folder's entries
+                    next_dl = None
+                    for sib in el.next_siblings:
+                        if getattr(sib, "name", None) == "dl":
+                            next_dl = sib
+                            break
+                    if next_dl is not None:
+                        walk_dl(next_dl)
                     folder_stack.pop()
-                a = el.find("a")
-                if a and a.get("href"):
+                a = el.find("a", recursive=False)
+                if a is not None and a.get("href"):
                     title = a.get_text(strip=True)
                     url = a.get("href")
                     folder_path = "/".join(folder_stack)
                     results.append(Bookmark(id=str(len(results)+1), title=title, url=url, folder_path=folder_path))
+            elif name == "dl":
+                walk_dl(el)
 
     top_dl = soup.find("dl")
-    if top_dl:
-        walk_ul(top_dl)
+    if top_dl is not None:
+        walk_dl(top_dl)
+    # Fallback: collect flat links if structured parse yielded nothing
+    if not results:
+        for a in soup.find_all("a"):
+            href = a.get("href")
+            if href:
+                results.append(Bookmark(id=str(len(results)+1), title=a.get_text(strip=True), url=href, folder_path="Bookmarks"))
     return results
-

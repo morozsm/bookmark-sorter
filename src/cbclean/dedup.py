@@ -1,12 +1,19 @@
 from __future__ import annotations
 
 from typing import Dict, List, Tuple
-from difflib import SequenceMatcher
+from rapidfuzz import fuzz
 from .utils import Bookmark
 
 
 def _title_sim(a: str, b: str) -> float:
-    return SequenceMatcher(None, a.lower(), b.lower()).ratio()
+    # Combine several robust fuzzy measures
+    scores = [
+        fuzz.token_set_ratio(a, b),
+        fuzz.partial_token_set_ratio(a, b),
+        fuzz.partial_ratio(a, b),
+        fuzz.token_sort_ratio(a, b),
+    ]
+    return max(scores) / 100.0
 
 
 def deduplicate(
@@ -57,4 +64,3 @@ def _resolve_dupe(a: Bookmark, b: Bookmark, prefer_shorter_url: bool) -> Tuple[B
         return (a, b) if len(au) <= len(bu) else (b, a)
     # fallback: keep first
     return a, b
-
