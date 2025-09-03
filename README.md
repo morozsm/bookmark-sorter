@@ -3,9 +3,10 @@
 Command-line tool to clean and organize Chrome bookmarks. It normalizes URLs, removes duplicates, assigns tags via rules, generates a change plan, and exports “clean” bookmarks to standard HTML with HTML/Markdown reports.
 
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)
-![Coverage](https://img.shields.io/badge/coverage-94%25-brightgreen.svg)
 ![Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)
 ![Lint: Ruff](https://img.shields.io/badge/lint-ruff-46aef7.svg)
+[![CI](https://github.com/USER_OR_ORG/bookmark-sorter/actions/workflows/ci.yml/badge.svg)](https://github.com/USER_OR_ORG/bookmark-sorter/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/USER_OR_ORG/bookmark-sorter/branch/main/graph/badge.svg)](https://codecov.io/gh/USER_OR_ORG/bookmark-sorter)
 
 ## Features
 - Import from Chrome profile JSON or exported HTML (Netscape format).
@@ -36,7 +37,8 @@ cbclean --config configs/config.local.yaml
 Outputs are written to `out/`: `bookmarks.cleaned.html`, `report.html`, `report.md`.
 
 ## Screenshot
-- Example report (HTML): open `out/report.html` after a run. A sample screenshot can be stored at `docs/screenshot-report.png`.
+- Example report (HTML): open `out/report.html` after a run.
+- To include a static image in the repo, save a capture as `docs/screenshot-report.png` and Git will render it in this section.
 
 ## Configuration
 Primary example: `configs/config.example.yaml`. Key fields:
@@ -109,6 +111,11 @@ Contributor guidelines: see `AGENTS.md`.
 - Embeddings-based and LLM-assisted categorization.
 - Rich dead-link handling (Wayback, move/delete strategies).
 - Additional performance metrics and detailed reports.
+
+---
+
+Note about badges:
+- Replace `USER_OR_ORG` in the CI and Codecov badge URLs with your actual GitHub org/user once the repo is pushed to GitHub. Codecov badge requires the Codecov app or `CODECOV_TOKEN` secret in the repo settings.
 
 ## Comparison With Alternatives
 - Chrome Bookmark Manager:
