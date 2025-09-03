@@ -10,4 +10,3 @@ def test_domain_rules(tmp_path: Path):
     bm = [Bookmark(id="1", title="Docs", url="https://docs.python.org/3/")]
     classify_by_rules(bm, rules)
     assert "Python" in bm[0].tags
-

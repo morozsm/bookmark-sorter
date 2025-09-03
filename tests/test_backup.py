@@ -9,4 +9,3 @@ def test_backup_file(tmp_path: Path):
     out = backup_file(src, dst_dir)
     assert out.exists()
     assert out.read_text(encoding="utf-8") == "data"
-

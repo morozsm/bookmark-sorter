@@ -21,7 +21,9 @@ def read_chrome_json(path: Path, profile: Optional[str] = None) -> List[Bookmark
             bid = node.get("id", "")
             title = node.get("name", "")
             url = node.get("url", None)
-            results.append(Bookmark(id=bid, title=title, url=url, folder_path=folder_path, profile=profile))
+            results.append(
+                Bookmark(id=bid, title=title, url=url, folder_path=folder_path, profile=profile)
+            )
         elif ntype == "folder":
             name = node.get("name", "")
             new_path = f"{folder_path}/{name}" if name else folder_path
@@ -60,7 +62,11 @@ def read_bookmarks_html(path: Path) -> List[Bookmark]:
                     title = a.get_text(strip=True)
                     url = a.get("href")
                     folder_path = "/".join(folder_stack)
-                    results.append(Bookmark(id=str(len(results)+1), title=title, url=url, folder_path=folder_path))
+                    results.append(
+                        Bookmark(
+                            id=str(len(results) + 1), title=title, url=url, folder_path=folder_path
+                        )
+                    )
             elif name == "dl":
                 walk_dl(el)
 
@@ -72,5 +78,12 @@ def read_bookmarks_html(path: Path) -> List[Bookmark]:
         for a in soup.find_all("a"):
             href = a.get("href")
             if href:
-                results.append(Bookmark(id=str(len(results)+1), title=a.get_text(strip=True), url=href, folder_path="Bookmarks"))
+                results.append(
+                    Bookmark(
+                        id=str(len(results) + 1),
+                        title=a.get_text(strip=True),
+                        url=href,
+                        folder_path="Bookmarks",
+                    )
+                )
     return results

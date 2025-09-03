@@ -17,4 +17,3 @@ def test_render_reports_creates_files(tmp_path: Path):
     )
     assert (tmp_path / "report.html").exists()
     assert (tmp_path / "report.md").exists()
-

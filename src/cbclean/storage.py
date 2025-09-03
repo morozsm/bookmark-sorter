@@ -33,4 +33,3 @@ class Storage:
             """
         )
         self.conn.commit()
-

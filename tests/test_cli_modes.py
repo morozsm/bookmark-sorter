@@ -47,4 +47,3 @@ apply:
     )
     cli_process(config=str(cfg2))
     assert (tmp_path / "o2" / "bookmarks.cleaned.html").exists()
-

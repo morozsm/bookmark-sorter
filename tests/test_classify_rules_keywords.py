@@ -21,4 +21,3 @@ keywords:
     classify_by_rules(bms, rules)
     assert "Dev" in bms[0].tags
     assert "Dev" in bms[1].tags
-

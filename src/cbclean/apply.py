@@ -9,7 +9,7 @@ def export_bookmarks_html(bookmarks: List[Bookmark], export_path: Path) -> None:
     ensure_dir(export_path.parent)
     with export_path.open("w", encoding="utf-8") as f:
         f.write("<!DOCTYPE NETSCAPE-Bookmark-file-1>\n")
-        f.write("<META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; charset=UTF-8\">\n")
+        f.write('<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">\n')
         f.write("<TITLE>Bookmarks</TITLE>\n<H1>Bookmarks</H1>\n<DL><p>\n")
         # Flat export grouped by folder_path
         by_folder = {}
@@ -20,15 +20,12 @@ def export_bookmarks_html(bookmarks: List[Bookmark], export_path: Path) -> None:
             for b in items:
                 if not b.url:
                     continue
-                f.write(f"<DT><A HREF=\"{html_escape(b.normalized_url or b.url)}\">{html_escape(b.title)}</A>\n")
+                f.write(
+                    f'<DT><A HREF="{html_escape(b.normalized_url or b.url)}">{html_escape(b.title)}</A>\n'
+                )
             f.write("</DL><p>\n")
         f.write("</DL><p>\n")
 
 
 def html_escape(s: str) -> str:
-    return (
-        s.replace("&", "&amp;")
-        .replace("<", "&lt;")
-        .replace(">", "&gt;")
-        .replace('"', "&quot;")
-    )
+    return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")

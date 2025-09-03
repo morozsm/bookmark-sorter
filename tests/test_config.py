@@ -8,4 +8,3 @@ def test_app_config_defaults_and_override():
     cfg2 = AppConfig.model_validate({"output": {"export_dir": "./o", "report_formats": ["md"]}})
     assert cfg2.output.export_dir == "./o"
     assert cfg2.output.report_formats == ["md"]
-

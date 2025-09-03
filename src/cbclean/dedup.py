@@ -58,8 +58,8 @@ def deduplicate(
 
 
 def _resolve_dupe(a: Bookmark, b: Bookmark, prefer_shorter_url: bool) -> Tuple[Bookmark, Bookmark]:
-    au = (a.normalized_url or a.url or "")
-    bu = (b.normalized_url or b.url or "")
+    au = a.normalized_url or a.url or ""
+    bu = b.normalized_url or b.url or ""
     if prefer_shorter_url and au and bu:
         return (a, b) if len(au) <= len(bu) else (b, a)
     # fallback: keep first

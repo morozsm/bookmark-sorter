@@ -11,4 +11,3 @@ def backup_file(src: Path, dst_dir: Path) -> Path:
     data = src.read_bytes()
     dst.write_bytes(data)
     return dst
-

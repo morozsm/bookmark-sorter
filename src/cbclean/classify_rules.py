@@ -43,4 +43,3 @@ def classify_by_rules(bookmarks: List[Bookmark], rules: Dict[str, Dict[str, List
                         tags.extend(tgs)
         # de-duplicate tags
         b.tags = sorted(set(tags))
-

@@ -12,7 +12,9 @@ class PlanItem:
     bookmark_id: str
 
 
-def propose_changes(original: List[Bookmark], deduped: List[Bookmark], duplicates: List[Bookmark]) -> List[PlanItem]:
+def propose_changes(
+    original: List[Bookmark], deduped: List[Bookmark], duplicates: List[Bookmark]
+) -> List[PlanItem]:
     plan: List[PlanItem] = []
     # Duplicates: move to trash
     for b in duplicates:

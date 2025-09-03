@@ -10,4 +10,3 @@ from .utils import Bookmark
 def classify_by_embeddings(bookmarks: List[Bookmark]) -> None:  # pragma: no cover
     # Not implemented in MVP. Leave tags as-is.
     return None
-

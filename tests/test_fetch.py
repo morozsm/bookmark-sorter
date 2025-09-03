@@ -12,4 +12,3 @@ def test_check_liveness_enabled_marks_unchecked():
     b = [Bookmark(id="1", title="t", url="https://ex.com")]
     check_liveness(b, enabled=True)
     assert b[0].liveness == "unchecked"
-

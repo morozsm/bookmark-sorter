@@ -15,4 +15,3 @@ def test_normalize_url_exception_returns_original():
     x = X()
     out = normalize_url(x, strip_params=[], strip_fragments=True, strip_www_flag=True)  # type: ignore[arg-type]
     assert out is x
-

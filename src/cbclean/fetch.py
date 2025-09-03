@@ -10,4 +10,3 @@ def check_liveness(bookmarks: List[Bookmark], *, enabled: bool) -> None:
     for b in bookmarks:
         if b.url:
             b.liveness = status
-

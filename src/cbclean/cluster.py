@@ -8,4 +8,3 @@ from .utils import Bookmark
 
 def cluster_bookmarks(bookmarks: List[Bookmark]) -> None:  # pragma: no cover
     return None
-

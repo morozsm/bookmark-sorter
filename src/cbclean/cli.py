@@ -23,7 +23,11 @@ app = typer.Typer(add_completion=False, help="Chrome bookmarks cleaner and organ
 
 
 @app.command()
-def process(config: str = typer.Option("configs/config.example.yaml", "--config", "-c", help="Path to YAML config")) -> None:
+def process(
+    config: str = typer.Option(
+        "configs/config.example.yaml", "--config", "-c", help="Path to YAML config"
+    )
+) -> None:
     """Run full pipeline: read -> normalize -> dedup -> classify -> plan -> apply -> report"""
     cfg = _load_config(Path(config))
 
@@ -61,7 +65,9 @@ def process(config: str = typer.Option("configs/config.example.yaml", "--config"
 
     # Plan
     plan_items = propose_changes(bookmarks, deduped, duplicates)
-    plan_dicts = [dict(action=p.action, reason=p.reason, bookmark_id=p.bookmark_id) for p in plan_items]
+    plan_dicts = [
+        dict(action=p.action, reason=p.reason, bookmark_id=p.bookmark_id) for p in plan_items
+    ]
 
     # Apply
     out_dir = Path(cfg.output.export_dir)
